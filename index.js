@@ -11,10 +11,10 @@ class Swarm extends EventEmitter {
 
     if (!opts) opts = {}
 
-    opts.socket = this.socket = opts.socket || utp()
+    opts.socket = this.socket = opts.socket || utp({ allowHalfOpen: true })
 
     this.discovery = discovery(opts)
-    this.server = net.createServer()
+    this.server = net.createServer({ allowHalfOpen: true })
     this.queue = new Queue()
 
     const self = this
